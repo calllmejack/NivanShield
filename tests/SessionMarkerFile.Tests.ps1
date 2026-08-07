@@ -41,7 +41,9 @@ try {
     )
 
     # This is the exact restart scenario that failed in 6.0.5.
-    $writeMethod.Invoke($null, @($markerPath)) | Out-Null
+    $invokeArgs = New-Object 'System.Object[]' 1
+    $invokeArgs[0] = [string]$markerPath
+    $writeMethod.Invoke($null, $invokeArgs) | Out-Null
     $firstTimestamp = [DateTime]::Parse(
         [IO.File]::ReadAllText($markerPath),
         [Globalization.CultureInfo]::InvariantCulture,
@@ -53,7 +55,7 @@ try {
     ) 'The refreshed marker should remain hidden.'
 
     # Verify another abandoned-session restart can refresh the hidden marker too.
-    $writeMethod.Invoke($null, @($markerPath)) | Out-Null
+    $writeMethod.Invoke($null, $invokeArgs) | Out-Null
     [void][DateTime]::Parse(
         [IO.File]::ReadAllText($markerPath),
         [Globalization.CultureInfo]::InvariantCulture,
