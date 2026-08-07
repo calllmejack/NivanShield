@@ -1,0 +1,10 @@
+ZXing.Net 0.16.11
+Copyright ZXing.Net contributors
+https://github.com/micjahn/ZXing.Net
+
+Used only for local, offline QR-code decoding.
+Licensed under the Apache License, Version 2.0.
+See LICENSE-APACHE-2.0.txt in this directory.
+
+Bundled file: zxing.dll (.NET Framework 4.0)
+SHA-256: 643a5a3db0ae02998b507beb82dbc362a2d5593b429963db17eb78089aabb95a

@@ -1,0 +1,27 @@
+# Compiled release files
+NivanShield.exe
+app/NivanAskPass.exe
+app/build-version.txt
+
+# User and runtime data
+settings.json
+*.dpapi
+*.log
+*.old
+runtime/
+updates/
+logs/
+credentials/
+
+# IDE and build output
+.vs/
+.vscode/
+bin/
+obj/
+Release/
+*.user
+*.suo
+
+# Archives
+*.zip
+*.rar

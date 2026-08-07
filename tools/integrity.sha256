@@ -1,0 +1,5 @@
+# Nivan Shield bundled executable integrity manifest.
+# Regenerate only when an upstream binary is deliberately upgraded and reviewed.
+b365388ee5f53edd453a7a461e3f58e05c63eebcc39c681070f05f2eacfd4c6d  tools/nekoray/nekobox_core.exe
+643a5a3db0ae02998b507beb82dbc362a2d5593b429963db17eb78089aabb95a  tools/qrcode/zxing.dll
+15c2d007954ac53ba69b80ec91242786b3c0b71d52649165b4ca1d5cc96ef8f1  tools/xray/xray.exe

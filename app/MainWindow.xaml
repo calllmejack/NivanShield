@@ -1,0 +1,2085 @@
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Nivan Shield"
+    Width="1080"
+    Height="740"
+    MinWidth="900"
+    MinHeight="650"
+    WindowStartupLocation="CenterScreen"
+    Background="#090E1A"
+    Foreground="#F3F7FF"
+    FontFamily="Segoe UI"
+    UseLayoutRounding="True">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PageBackground" Color="#090E1A"/>
+        <SolidColorBrush x:Key="SidebarBackground" Color="#0E1525"/>
+        <SolidColorBrush x:Key="CardBackground" Color="#111A2C"/>
+        <SolidColorBrush x:Key="CardBorder" Color="#1D2A43"/>
+        <SolidColorBrush x:Key="InputBackground" Color="#0C1424"/>
+        <SolidColorBrush x:Key="PrimaryText" Color="#F3F7FF"/>
+        <SolidColorBrush x:Key="SecondaryText" Color="#8E9CB3"/>
+        <SolidColorBrush x:Key="Accent" Color="#5DD9FF"/>
+        <SolidColorBrush x:Key="AccentDeep" Color="#2C9DFF"/>
+        <SolidColorBrush x:Key="Success" Color="#39DBA0"/>
+        <SolidColorBrush x:Key="Warning" Color="#FFBD69"/>
+        <SolidColorBrush x:Key="Danger" Color="#FF667A"/>
+
+        <Style TargetType="ToolTip">
+            <Setter Property="Background" Value="#18233A"/>
+            <Setter Property="Foreground" Value="#F3F7FF"/>
+            <Setter Property="BorderBrush" Value="#2A3A58"/>
+            <Setter Property="Padding" Value="8,5"/>
+        </Style>
+
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CardBorder}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <Style x:Key="NavButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#8E9CB3"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="Margin" Value="10,3"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="NavBorder" Background="{TemplateBinding Background}" CornerRadius="10">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="NavBorder" Property="Background" Value="#17223A"/>
+                                <Setter Property="Foreground" Value="#F3F7FF"/>
+                            </Trigger>
+                            <Trigger Property="Tag" Value="active">
+                                <Setter TargetName="NavBorder" Property="Background" Value="#1A2B46"/>
+                                <Setter Property="Foreground" Value="#5DD9FF"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#06111A"/>
+            <Setter Property="Background" Value="#5DD9FF"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Padding" Value="20,0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#8AE5FF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#35C6F3"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.35"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#DCE7F7"/>
+            <Setter Property="Background" Value="#19253C"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="10" BorderBrush="#2B3B5A" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#233552"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ButtonBorder" Property="Opacity" Value="0.35"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
+            <Setter Property="Foreground" Value="#FF8D9B"/>
+            <Setter Property="Background" Value="#2B1A29"/>
+        </Style>
+
+        <Style x:Key="PowerToggleButton" TargetType="Button">
+            <Setter Property="Width" Value="42"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe UI Symbol"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#5DD9FF"/>
+            <Setter Property="Background" Value="#14283A"/>
+            <Setter Property="BorderBrush" Value="#2E7894"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="PowerBorder"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="21">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PowerBorder" Property="Opacity" Value="0.82"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="PowerBorder" Property="Opacity" Value="0.62"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PowerBorder" Property="Opacity" Value="0.35"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Input" TargetType="TextBox">
+            <Setter Property="Foreground" Value="#F3F7FF"/>
+            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+            <Setter Property="BorderBrush" Value="#293854"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,9"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="CaretBrush" Value="#5DD9FF"/>
+            <Setter Property="SelectionBrush" Value="#2C9DFF"/>
+            <Setter Property="SelectionTextBrush" Value="#FFFFFF"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="InputBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="InputBorder" Property="BorderBrush" Value="#5DD9FF"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="InputBorder" Property="BorderBrush" Value="#3A5277"/>
+                            </Trigger>
+                            <Trigger Property="IsReadOnly" Value="True">
+                                <Setter TargetName="InputBorder" Property="Background" Value="#0A1120"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="InputBorder" Property="Background" Value="#0A1120"/>
+                                <Setter Property="Foreground" Value="#77879F"/>
+                                <Setter Property="Opacity" Value="0.72"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Foreground" Value="#F3F7FF"/>
+            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+            <Setter Property="BorderBrush" Value="#293854"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border x:Name="PasswordBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="PasswordBorder" Property="BorderBrush" Value="#5DD9FF"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="PasswordBorder" Property="BorderBrush" Value="#3A5277"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="PasswordBorder" Property="Background" Value="#0A1120"/>
+                                <Setter Property="Opacity" Value="0.72"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="#F3F7FF"/>
+            <Setter Property="Background" Value="#111A2C"/>
+            <Setter Property="Padding" Value="12,9"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="ItemBorder"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}"
+                                CornerRadius="6">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#233552"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#1A304B"/>
+                                <Setter Property="Foreground" Value="#5DD9FF"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#687991"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#F3F7FF"/>
+            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+            <Setter Property="BorderBrush" Value="#293854"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MaxDropDownHeight" Value="260"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="ComboBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="8">
+                                <Grid>
+                                    <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                      VerticalAlignment="Center"
+                                                      HorizontalAlignment="Left"
+                                                      Content="{TemplateBinding SelectionBoxItem}"
+                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                      ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"/>
+                                    <Path Data="M 0,0 L 5,5 L 10,0"
+                                          Stroke="#8FA2BC"
+                                          StrokeThickness="1.6"
+                                          StrokeStartLineCap="Round"
+                                          StrokeEndLineCap="Round"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,13,0"/>
+                                </Grid>
+                            </Border>
+                            <ToggleButton Focusable="False"
+                                          ClickMode="Press"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Background="Transparent"/>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <Popup x:Name="PART_Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Fade">
+                                <Border Background="#111A2C"
+                                        BorderBrush="#31415F"
+                                        BorderThickness="1"
+                                        CornerRadius="8"
+                                        Padding="4"
+                                        Margin="0,4,0,0"
+                                        MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
+                                    <ScrollViewer MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                                  VerticalScrollBarVisibility="Auto">
+                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ComboBorder" Property="BorderBrush" Value="#3A5277"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter TargetName="ComboBorder" Property="BorderBrush" Value="#5DD9FF"/>
+                            </Trigger>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter TargetName="ComboBorder" Property="BorderBrush" Value="#5DD9FF"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ComboBorder" Property="Background" Value="#0A1120"/>
+                                <Setter Property="Foreground" Value="#77879F"/>
+                                <Setter Property="Opacity" Value="0.72"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#DCE7F7"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="0,7"/>
+        </Style>
+
+        <Style TargetType="ProgressBar">
+            <Setter Property="Height" Value="8"/>
+            <Setter Property="Foreground" Value="#5DD9FF"/>
+            <Setter Property="Background" Value="#0A1220"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4" ClipToBounds="True">
+                            <Grid x:Name="PART_Track">
+                                <Rectangle x:Name="PART_Indicator"
+                                           Fill="{TemplateBinding Foreground}"
+                                           HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource SecondaryText}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,7"/>
+        </Style>
+
+        <Style x:Key="PageTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="SectionTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource PrimaryText}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid x:Name="AppLayoutGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SidebarColumn" Width="214"/>
+            <ColumnDefinition x:Name="ContentColumn" Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="SidebarPanel" Grid.Column="0" Background="{StaticResource SidebarBackground}" BorderBrush="#172238" BorderThickness="0,0,1,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="112"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="22,22,18,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="46"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="42" Height="42" CornerRadius="12" Background="#16354A">
+                        <Grid>
+                            <Path Data="M 21,5 L 34,10 L 32,26 C 30,33 25,37 21,39 C 17,37 12,33 10,26 L 8,10 Z"
+                                  Fill="#10283A" Stroke="#5DD9FF" StrokeThickness="2" StrokeLineJoin="Round"/>
+                            <Path Data="M 15,27 L 15,16 L 27,27 L 27,16"
+                                  Stroke="#5DD9FF" StrokeThickness="2.2" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                        </Grid>
+                    </Border>
+                    <StackPanel Grid.Column="1" Margin="10,1,0,0">
+                        <TextBlock Text="N I V A N" FontSize="10" FontWeight="Bold" Foreground="#5DD9FF"/>
+                        <TextBlock Text="Shield" FontSize="21" FontWeight="SemiBold" Foreground="#F3F7FF"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Grid.Row="1" Margin="0,12,0,0">
+                    <TextBlock Text="N A V I G A T E" Foreground="#53637C" FontSize="9" FontWeight="Bold" Margin="27,0,0,10"/>
+                    <Button x:Name="NavDashboard" Content="●   Home" Style="{StaticResource NavButton}" Tag="active"/>
+                    <Button x:Name="NavProfiles" Content="▦   Connections" Style="{StaticResource NavButton}"/>
+                    <Button x:Name="NavDns" Content="DNS  DNS" Style="{StaticResource NavButton}"/>
+                    <Button x:Name="NavAbout" Content="⚙   Settings" Style="{StaticResource NavButton}"/>
+                    <Button x:Name="NavConnection" Content="↗   SSH" Style="{StaticResource NavButton}" Visibility="Collapsed"/>
+                    <Button x:Name="NavV2Ray" Content="◈   V2Ray" Style="{StaticResource NavButton}" Visibility="Collapsed"/>
+                    <Button x:Name="NavPsiphon" Content="◎   Psiphon" Style="{StaticResource NavButton}" Visibility="Collapsed"/>
+                    <Button x:Name="NavHealth" Content="⌁   Connection health" Style="{StaticResource NavButton}" Visibility="Collapsed"/>
+                    <Button x:Name="NavNekoRay" Content="◇   Integrated routing" Style="{StaticResource NavButton}" Visibility="Collapsed"/>
+                    <Button x:Name="NavLogs" Content="≡   Activity Logs" Style="{StaticResource NavButton}" Visibility="Collapsed"/>
+                </StackPanel>
+
+                <Border Grid.Row="2" Margin="16,8,16,18" CornerRadius="12" Background="#121D31" BorderBrush="#20304A" BorderThickness="1" Padding="13">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse x:Name="SidebarStatusDot" Width="8" Height="8" Fill="#64738A" Margin="0,2,8,0"/>
+                            <TextBlock x:Name="SidebarStatusText" Text="Disconnected" FontWeight="SemiBold" FontSize="12"/>
+                        </StackPanel>
+                        <TextBlock x:Name="SidebarEndpointText" Text="127.0.0.1:1080" Foreground="#78889F" FontSize="11" Margin="16,5,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Grid x:Name="ContentPanel" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="76"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" BorderBrush="#162238" BorderThickness="0,0,0,1" Padding="30,0">
+                <Grid>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock x:Name="HeaderTitle" Text="Dashboard" FontSize="17" FontWeight="SemiBold"/>
+                        <TextBlock x:Name="HeaderSubtitle" Text="SSH, V2Ray config, or subscription" Foreground="#77879F" FontSize="11" Margin="0,4,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <ComboBox x:Name="LanguageInput" Width="118" Margin="0,0,10,0" ToolTip="Interface language">
+                            <ComboBoxItem Content="English" Tag="en"/>
+                            <ComboBoxItem Content="فارسی" Tag="fa"/>
+                        </ComboBox>
+                        <Border Background="#111B2E" BorderBrush="#20304B" BorderThickness="1" CornerRadius="18" Padding="12,8">
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse x:Name="HeaderStatusDot" Width="8" Height="8" Fill="#64738A" Margin="0,1,8,0"/>
+                                <TextBlock x:Name="HeaderStatusText" Text="Offline" FontSize="12" FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Border>
+                        <Button x:Name="PowerButton"
+                                Content="⏻"
+                                Style="{StaticResource PowerToggleButton}"
+                                Margin="10,0,0,0"
+                                ToolTip="Connect or disconnect"
+                                AutomationProperties.Name="Connect or disconnect"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1" Margin="30,24,30,26">
+                <!-- DASHBOARD -->
+                <ScrollViewer x:Name="DashboardPage" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Connect" Style="{StaticResource PageTitle}"/>
+                                <TextBlock Text="Open a section below, or connect the last active profile." Foreground="{StaticResource SecondaryText}" Margin="0,7,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button x:Name="EmergencyNetworkResetButton" Content="Restore normal internet" Style="{StaticResource DangerButton}" Margin="0,0,10,0"/>
+                                <Button x:Name="SmartConnectButton" Content="Smart connect" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0" Visibility="Collapsed"/>
+                                <Button x:Name="TestServerButton" Content="Test server" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0" Visibility="Collapsed"/>
+                                <Button x:Name="DisconnectButton" Content="Disconnect" Style="{StaticResource DangerButton}" Margin="0,0,10,0" IsEnabled="False" Visibility="Collapsed"/>
+                                <Button x:Name="ConnectButton" Content="Connect" Style="{StaticResource PrimaryButton}" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="20" Visibility="Collapsed">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="16"/>
+                                    <ColumnDefinition Width="280"/>
+                                    <ColumnDefinition Width="12"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="Active connection" Style="{StaticResource SectionTitle}"/>
+                                    <TextBlock x:Name="HomeProfileDetailText" Text="Select one of your saved SSH or V2Ray connections."
+                                               Foreground="#74859D" FontSize="11" Margin="0,6,0,0" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                                <ComboBox x:Name="HomeProfileInput" Grid.Column="2" DisplayMemberPath="Name" VerticalAlignment="Center"/>
+                                <Button x:Name="HomeManageProfilesButton" Grid.Column="4" Content="Manage" Style="{StaticResource SecondaryButton}" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="20">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,13">
+                                    <StackPanel>
+                                        <TextBlock Text="Where should the connection work?" Style="{StaticResource SectionTitle}"/>
+                                        <TextBlock x:Name="RoutingModeDetailText"
+                                                   Text="Choose one simple mode. Nivan configures TUN and System Proxy automatically."
+                                                   Foreground="#74859D" FontSize="11" Margin="0,6,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <ComboBox x:Name="BrowserInput" Width="145" Margin="0,0,10,0"/>
+                                        <Button x:Name="OpenProtectedBrowserButton" Content="Open protected browser" Style="{StaticResource SecondaryButton}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <ComboBox x:Name="RoutingModeInput" Width="380" HorizontalAlignment="Left">
+                                    <ComboBoxItem Content="Browser only" Tag="BrowserOnly"/>
+                                    <ComboBoxItem Content="Selected applications" Tag="SelectedApps"/>
+                                    <ComboBoxItem Content="Whole Windows (TUN + System Proxy)" Tag="WholeDevice"/>
+                                    <ComboBoxItem Content="System Proxy (compatible apps)" Tag="SystemProxy"/>
+                                </ComboBox>
+                                <Grid x:Name="SelectedAppsPanel" Margin="0,12,0,0" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="95"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="SelectedAppsInput" Style="{StaticResource Input}" IsReadOnly="True"
+                                             ToolTip="Selected executable names separated by semicolons"/>
+                                    <Button x:Name="BrowseSelectedAppButton" Grid.Column="1" Content="Add app..." Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+                                    <Button x:Name="ClearSelectedAppsButton" Grid.Column="2" Content="Clear" Style="{StaticResource DangerButton}" Margin="10,0,0,0"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="18">
+                            <StackPanel>
+                                <TextBlock Text="Connection tools" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="Open the section you need. Account and server details can be edited at any time."
+                                           Foreground="#718199" FontSize="11" Margin="0,6,0,14"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="OpenSshQuickButton" Grid.Column="0" Style="{StaticResource SecondaryButton}" Height="78">
+                                        <StackPanel>
+                                            <TextBlock Text="SSH" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Account &amp; tunnel" Foreground="#8190A7" FontSize="10" Margin="0,5,0,0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="OpenConfigQuickButton" Grid.Column="2" Style="{StaticResource SecondaryButton}" Height="78">
+                                        <StackPanel>
+                                            <TextBlock Text="V2Ray" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Config &amp; subscription" Foreground="#8190A7" FontSize="10" Margin="0,5,0,0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="HomeDnsButton" Grid.Column="4" Style="{StaticResource SecondaryButton}" Height="78">
+                                        <StackPanel>
+                                            <TextBlock Text="DNS" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="HomeDnsStatusText" Text="Automatic" Foreground="#8190A7" FontSize="10" Margin="0,5,0,0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="OpenPsiphonQuickButton" Grid.Column="6" Style="{StaticResource SecondaryButton}" Height="78">
+                                        <StackPanel>
+                                            <TextBlock Text="Psiphon" FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Free fallback" Foreground="#8190A7" FontSize="10" Margin="0,5,0,0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button x:Name="OpenSubscriptionQuickButton" Visibility="Collapsed"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="24" Visibility="Collapsed">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="112"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Width="92" Height="92">
+                                    <Ellipse Stroke="#203957" StrokeThickness="8"/>
+                                    <Ellipse x:Name="HeroRing" Stroke="#40516A" StrokeThickness="8" StrokeDashArray="1.5,1.7"/>
+                                    <Ellipse x:Name="HeroStatusDot" Width="20" Height="20" Fill="#64738A"/>
+                                </Grid>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0,0,0">
+                                    <TextBlock x:Name="HeroStatusText" Text="Tunnel is offline" FontSize="22" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="StatusDetailText" Text="Ready to start a secure SOCKS5 tunnel." Foreground="{StaticResource SecondaryText}" Margin="0,7,0,0"/>
+                                    <TextBlock x:Name="DashboardEndpointText" Text="SOCKS5  •  127.0.0.1:1080" Foreground="#5DD9FF" FontSize="12" FontWeight="SemiBold" Margin="0,12,0,0"/>
+                                </StackPanel>
+                                <Border Grid.Column="2" Background="#0C1525" CornerRadius="12" Padding="17">
+                                    <StackPanel>
+                                        <TextBlock Text="S E S S I O N   U P T I M E" Foreground="#66768E" FontSize="9" FontWeight="Bold"/>
+                                        <TextBlock x:Name="UptimeText" Text="00:00:00" FontFamily="Consolas" FontSize="26" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                        <TextBlock Text="Auto-reconnect protected" Foreground="#728199" FontSize="11" Margin="0,6,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Grid Margin="0,0,0,16" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <TextBlock x:Name="DashboardServerKindText" Text="SSH SERVER" Foreground="#65758D" FontSize="10" FontWeight="Bold"/>
+                                    <TextBlock x:Name="DashboardServerText" Text="No server selected" FontSize="14" FontWeight="SemiBold" Margin="0,10,0,0" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock x:Name="DashboardActiveProfileText" Text="No profile configured" Foreground="#718199" FontSize="11" Margin="0,7,0,0" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="2" Style="{StaticResource Card}">
+                                <Grid>
+                                    <StackPanel>
+                                        <TextBlock Text="LOCAL PROXY" Foreground="#65758D" FontSize="10" FontWeight="Bold"/>
+                                        <TextBlock x:Name="DashboardProxyText" Text="127.0.0.1:1080" FontFamily="Consolas" FontSize="14" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                        <TextBlock Text="SOCKS5 endpoint" Foreground="#718199" FontSize="11" Margin="0,7,0,0"/>
+                                    </StackPanel>
+                                    <Button x:Name="CopyProxyButton" Content="Copy" Style="{StaticResource SecondaryButton}" Height="32" Padding="11,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                </Grid>
+                            </Border>
+                            <Border Grid.Column="4" Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <TextBlock x:Name="DashboardAuxTitleText" Text="SSH ROUTING" Foreground="#65758D" FontSize="10" FontWeight="Bold"/>
+                                    <TextBlock x:Name="DashboardNekoStatusText" Text="Not running" FontSize="14" FontWeight="SemiBold" Margin="0,10,0,0"/>
+                                    <TextBlock x:Name="DashboardNekoDetailText" Text="Managed by Nivan Shield" Foreground="#718199" FontSize="11" Margin="0,7,0,0"
+                                               TextTrimming="CharacterEllipsis" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="18">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Width="42" Height="42" CornerRadius="12" Background="#142B3E">
+                                    <TextBlock Text="⌁" Foreground="#5DD9FF" FontSize="23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Grid.Column="1" Margin="13,0,16,0" VerticalAlignment="Center">
+                                    <TextBlock x:Name="DashboardHealthSummaryText" Text="Connection health not tested" FontSize="14" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="DashboardHealthDetailText" Text="Measure real VPN latency, jitter, download, and upload." Foreground="#718199" FontSize="11" Margin="0,5,0,0"/>
+                                </StackPanel>
+                                <Button x:Name="OpenHealthButton" Grid.Column="2" Content="Open health center" Style="{StaticResource SecondaryButton}" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="18">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock x:Name="DiagnosticStatusText" Text="Connection diagnostics ready" FontSize="14" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="DiagnosticDetailText" Text="Checks the provider, server, local proxy, internet path, and routing mode."
+                                               Foreground="#718199" FontSize="11" Margin="0,5,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button x:Name="RunDiagnosticsButton" Content="Diagnose" Style="{StaticResource SecondaryButton}" Margin="0,0,8,0"/>
+                                    <Button x:Name="OpenDiagnosticsButton" Content="Run diagnosis" Style="{StaticResource SecondaryButton}" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Visibility="Collapsed">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="142"/>
+                                </Grid.RowDefinitions>
+                                <Grid>
+                                    <TextBlock Text="Recent activity" Style="{StaticResource SectionTitle}"/>
+                                    <Button x:Name="OpenFullLogsButton" Content="View all logs" Style="{StaticResource SecondaryButton}" Height="32" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBox x:Name="DashboardLogBox" Grid.Row="1" Margin="0,14,0,0" Background="Transparent" BorderThickness="0" Foreground="#8EA1B8" FontFamily="Consolas" FontSize="11" IsReadOnly="True" TextWrapping="NoWrap" VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- CONNECTION HEALTH -->
+                <ScrollViewer x:Name="HealthPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Connection health" Style="{StaticResource PageTitle}"/>
+                                <TextBlock Text="Verify the real path through the active VPN, not only the server port."
+                                           Foreground="{StaticResource SecondaryText}" Margin="0,7,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                <Button x:Name="CancelQualityTestButton" Content="Cancel" Style="{StaticResource DangerButton}" Margin="0,0,10,0" IsEnabled="False"/>
+                                <Button x:Name="QuickQualityTestButton" Content="Quick test" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                                <Button x:Name="FullQualityTestButton" Content="Full speed test" Style="{StaticResource PrimaryButton}"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="24">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="190"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Width="78" Height="78" CornerRadius="39" Background="#14283A" BorderBrush="#23405B" BorderThickness="1">
+                                    <TextBlock x:Name="HealthScoreText" Text="—" Foreground="#5DD9FF" FontSize="25" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock x:Name="HealthOverallText" Text="Ready to test" FontSize="21" FontWeight="SemiBold"/>
+                                    <TextBlock x:Name="HealthDetailText" Text="Connect first, then run a quick or full test." Foreground="#8E9CB3" Margin="0,7,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                    <TextBlock x:Name="HealthProgressStageText" Text="IDLE" Foreground="#65758D" FontSize="10" FontWeight="Bold"/>
+                                    <ProgressBar x:Name="HealthProgressBar" Minimum="0" Maximum="100" Value="0" Margin="0,11,0,0"/>
+                                    <TextBlock x:Name="HealthProgressDetailText" Text="No test is running" Foreground="#718199" FontSize="11" Margin="0,7,0,0" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Grid Margin="0,0,0,16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Column="0" Style="{StaticResource Card}" Padding="17">
+                                <StackPanel>
+                                    <TextBlock Text="SERVER LATENCY" Foreground="#65758D" FontSize="9" FontWeight="Bold"/>
+                                    <TextBlock x:Name="HealthServerLatencyText" Text="—" FontSize="21" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                    <TextBlock Text="Direct TCP reachability" Foreground="#718199" FontSize="10" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="2" Style="{StaticResource Card}" Padding="17">
+                                <StackPanel>
+                                    <TextBlock Text="VPN LATENCY" Foreground="#65758D" FontSize="9" FontWeight="Bold"/>
+                                    <TextBlock x:Name="HealthTunnelLatencyText" Text="—" FontSize="21" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                    <TextBlock Text="Measured inside the tunnel" Foreground="#718199" FontSize="10" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="4" Style="{StaticResource Card}" Padding="17">
+                                <StackPanel>
+                                    <TextBlock Text="JITTER" Foreground="#65758D" FontSize="9" FontWeight="Bold"/>
+                                    <TextBlock x:Name="HealthJitterText" Text="—" FontSize="21" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                    <TextBlock Text="Latency variation" Foreground="#718199" FontSize="10" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource Card}" Padding="17">
+                                <StackPanel>
+                                    <TextBlock Text="REQUEST FAILURES" Foreground="#65758D" FontSize="9" FontWeight="Bold"/>
+                                    <TextBlock x:Name="HealthFailureRateText" Text="—" FontSize="21" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                    <TextBlock Text="Failed tunneled samples" Foreground="#718199" FontSize="10" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Row="2" Grid.Column="2" Style="{StaticResource Card}" Padding="17">
+                                <StackPanel>
+                                    <TextBlock Text="DOWNLOAD" Foreground="#65758D" FontSize="9" FontWeight="Bold"/>
+                                    <TextBlock x:Name="HealthDownloadText" Text="—" FontSize="21" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                    <TextBlock Text="Actual VPN throughput" Foreground="#718199" FontSize="10" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Row="2" Grid.Column="4" Style="{StaticResource Card}" Padding="17">
+                                <StackPanel>
+                                    <TextBlock Text="UPLOAD" Foreground="#65758D" FontSize="9" FontWeight="Bold"/>
+                                    <TextBlock x:Name="HealthUploadText" Text="—" FontSize="21" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                    <TextBlock Text="Actual VPN throughput" Foreground="#718199" FontSize="10" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="12"/>
+                                <ColumnDefinition Width="330"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <TextBlock Text="Recent tests" Style="{StaticResource SectionTitle}"/>
+                                    <TextBox x:Name="HealthHistoryBox" Height="150" Margin="0,12,0,0" Background="#0A1220" BorderBrush="#20304A" BorderThickness="1" Foreground="#9CB0C8" FontFamily="Consolas" FontSize="11" IsReadOnly="True" Padding="12" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Column="2" Style="{StaticResource Card}">
+                                <StackPanel>
+                                    <TextBlock Text="Test behavior" Style="{StaticResource SectionTitle}"/>
+                                    <TextBlock Text="Quick test uses a small download and upload. Full test uses more data for a steadier result. Both are forced through Nivan's active local proxy."
+                                               Foreground="#91A1B8" TextWrapping="Wrap" LineHeight="19" Margin="0,11,0,0"/>
+                                    <TextBlock Text="Speed measurements use Cloudflare's public speed-test endpoints. Do not run a full test on a limited data plan."
+                                               Foreground="#FFBD69" TextWrapping="Wrap" LineHeight="19" Margin="0,10,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- CONNECTION PROFILES -->
+                <Grid x:Name="ProfilesPage" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock x:Name="ProfilesPageTitleText" Text="Connection profiles" Style="{StaticResource PageTitle}"/>
+                            <TextBlock x:Name="ProfilesPageSubtitleText" Text="Organize SSH and V2Ray servers, choose the active route, and compare availability in parallel."
+                                       Foreground="{StaticResource SecondaryText}" Margin="0,7,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Button x:Name="NewProfileButton" Content="New profile" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                            <Button x:Name="TestAllProfilesButton" Content="Test all profiles" Style="{StaticResource PrimaryButton}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="390"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Style="{StaticResource Card}" Padding="14">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="12"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="12"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel>
+                                    <TextBox x:Name="ProfileSearchInput" Style="{StaticResource Input}" ToolTip="Search by name, category, host, or username"/>
+                                    <Grid Margin="0,10,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ComboBox x:Name="ProfileCategoryFilter" Grid.Column="0" ToolTip="Filter category">
+                                            <ComboBoxItem Content="All categories" Tag="__all__" IsSelected="True"/>
+                                        </ComboBox>
+                                        <ComboBox x:Name="ProfileSortInput" Grid.Column="2" ToolTip="Sort profiles" SelectedIndex="0">
+                                            <ComboBoxItem Content="Recommended" Tag="Recommended"/>
+                                            <ComboBoxItem Content="Latency" Tag="Latency"/>
+                                            <ComboBoxItem Content="Name" Tag="Name"/>
+                                            <ComboBoxItem Content="Category" Tag="Category"/>
+                                            <ComboBoxItem Content="Protocol" Tag="Protocol"/>
+                                        </ComboBox>
+                                    </Grid>
+                                    <TextBlock x:Name="ProfileShortcutHintText"
+                                               Text="Shortcuts: Ctrl+A select all  •  Delete remove  •  Ctrl+D duplicate  •  Ctrl+N new SSH"
+                                               Foreground="#64758E" FontSize="10" Margin="0,9,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <ListBox x:Name="ProfileList"
+                                         Grid.Row="2"
+                                         SelectionMode="Extended"
+                                         Background="#0A1220"
+                                         BorderBrush="#22314C"
+                                         BorderThickness="1"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                         HorizontalContentAlignment="Stretch">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="Margin" Value="5,4"/>
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border x:Name="ProfileItemBorder" Background="{TemplateBinding Background}" CornerRadius="10">
+                                                            <ContentPresenter/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="ProfileItemBorder" Property="Background" Value="#16243A"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="ProfileItemBorder" Property="Background" Value="#1A304B"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="12,10">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="4"/>
+                                                    <ColumnDefinition Width="12"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Background="{Binding StatusBrush}" CornerRadius="2"/>
+                                                <StackPanel Grid.Column="2">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding FavoriteLabel}" Foreground="#FFBD69" Margin="0,0,6,0"/>
+                                                        <TextBlock Text="{Binding Name}" Foreground="#F3F7FF" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                                        <TextBlock Text="{Binding ActiveLabel}" Foreground="#5DD9FF" FontSize="9" FontWeight="Bold" Margin="8,3,0,0"/>
+                                                    </StackPanel>
+                                                    <TextBlock Text="{Binding Endpoint}" Foreground="#8292AA" FontFamily="Consolas" FontSize="11" Margin="0,5,0,0" TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="3" HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding LatencyDisplay}" Foreground="{Binding StatusBrush}" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                                                    <TextBlock Text="{Binding EngineLabel}" Foreground="#687991" FontSize="10" Margin="0,5,0,0" HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+
+                                <Grid Grid.Row="4">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="8"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock x:Name="SelectedProfileStatusText" Text="Select a profile to edit" Foreground="#74859D" FontSize="11" VerticalAlignment="Center"/>
+                                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button x:Name="SelectAllProfilesButton" Content="Select all" Style="{StaticResource SecondaryButton}" Height="34" Padding="12,0"/>
+                                        <Button x:Name="DuplicateProfileButton" Content="Duplicate" Style="{StaticResource SecondaryButton}" Height="34" Padding="12,0" Margin="8,0,0,0"/>
+                                        <Button x:Name="DeleteProfileButton" Content="Delete selected" Style="{StaticResource DangerButton}" Height="34" Padding="12,0" Margin="8,0,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                                    <StackPanel>
+                                        <TextBlock Text="Profile identity" Style="{StaticResource SectionTitle}" Margin="0,0,0,16"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="14"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="Profile name" Style="{StaticResource Label}"/>
+                                                <TextBox x:Name="ProfileNameInput" Style="{StaticResource Input}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="Category" Style="{StaticResource Label}"/>
+                                                <TextBox x:Name="ProfileCategoryInput" Style="{StaticResource Input}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <CheckBox x:Name="ProfileFavoriteCheck" Content="Pin as a favorite profile" Margin="0,12,0,0"/>
+                                        <TextBlock x:Name="ProfileEngineText" Text="Engine: SSH" Foreground="#5DD9FF" FontSize="11" Margin="0,5,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border x:Name="SshProfileEditorPanel" Style="{StaticResource Card}" Margin="0,0,0,16">
+                                    <StackPanel>
+                                        <TextBlock Text="SSH endpoint" Style="{StaticResource SectionTitle}" Margin="0,0,0,16"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="12"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="Host" Style="{StaticResource Label}"/>
+                                                <TextBox x:Name="ProfileHostInput" Style="{StaticResource Input}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="SSH port" Style="{StaticResource Label}"/>
+                                                <TextBox x:Name="ProfilePortInput" Style="{StaticResource Input}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Margin="0,14,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="12"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="Username" Style="{StaticResource Label}"/>
+                                                <TextBox x:Name="ProfileUserInput" Style="{StaticResource Input}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="Local SOCKS5 port" Style="{StaticResource Label}"/>
+                                                <TextBox x:Name="ProfileSocksPortInput" Style="{StaticResource Input}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border x:Name="ProxyProfileEditorPanel" Style="{StaticResource Card}" Margin="0,0,0,16" Visibility="Collapsed">
+                                    <StackPanel>
+                                        <TextBlock Text="Imported proxy endpoint" Style="{StaticResource SectionTitle}" Margin="0,0,0,16"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="12"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="Protocol" Style="{StaticResource Label}"/>
+                                                <TextBlock x:Name="ProxyProtocolText" Text="VLESS" FontSize="15" FontWeight="SemiBold"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="Server" Style="{StaticResource Label}"/>
+                                                <TextBlock x:Name="ProxyServerText" Text="example.com:443" FontFamily="Consolas" FontSize="13" TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Margin="0,15,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="12"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="Transport / security" Style="{StaticResource Label}"/>
+                                                <TextBlock x:Name="ProxyTransportText" Text="ws  •  tls" FontSize="13"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2">
+                                                <TextBlock Text="Local SOCKS5 port" Style="{StaticResource Label}"/>
+                                                <TextBox x:Name="ProxyLocalPortInput" Style="{StaticResource Input}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <TextBlock x:Name="ProxyCredentialStatusText"
+                                                   Text="Encrypted credential available"
+                                                   Foreground="#39DBA0"
+                                                   FontSize="11"
+                                                   Margin="0,13,0,0"/>
+                                        <TextBlock Text="Protocol credentials are protected with Windows DPAPI. Re-import the link to change endpoint, transport, TLS, or Reality options."
+                                                   Foreground="#74859D"
+                                                   FontSize="11"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0,7,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="Availability" Style="{StaticResource SectionTitle}"/>
+                                            <TextBlock x:Name="ProfileTestDetailText" Text="This profile has not been tested yet." Foreground="#8393AB" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                        <Button x:Name="TestSelectedProfileButton" Grid.Column="1" Content="Test profile" Style="{StaticResource SecondaryButton}" Margin="14,0,0,0"/>
+                                    </Grid>
+                                </Border>
+
+                                <Grid Margin="0,0,0,4">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="EditAdvancedProfileButton" Content="Advanced SSH settings" Style="{StaticResource SecondaryButton}"/>
+                                        <Button x:Name="SetActiveProfileButton" Content="Use &amp; connect" Style="{StaticResource PrimaryButton}" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                    <Button x:Name="SaveProfileButton" Content="Save profile" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBlock Text="Use &amp; connect selects this profile and starts the connection in one step."
+                                           Foreground="#74859D" FontSize="11" Margin="0,8,0,0"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+
+                <!-- SSH CONNECTION -->
+                <ScrollViewer x:Name="ConnectionPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,20">
+                            <StackPanel>
+                                <TextBlock Text="SSH" Style="{StaticResource PageTitle}"/>
+                                <TextBlock Text="Enter the server once, save the password, and connect." Foreground="{StaticResource SecondaryText}" Margin="0,7,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <Button x:Name="SshDisconnectButton" Content="Disconnect" Style="{StaticResource DangerButton}" Margin="0,0,10,0" IsEnabled="False" Visibility="Collapsed"/>
+                                <Button x:Name="SshConnectButton" Content="Save &amp; connect" Style="{StaticResource PrimaryButton}" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Server" Style="{StaticResource SectionTitle}" Margin="0,0,0,18"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Host" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="HostInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="SSH port" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="PortInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="4">
+                                        <TextBlock Text="Username" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="UserInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Margin="0,15,0,0" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Local SOCKS5 port" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="SocksPortInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Host key handling" Style="{StaticResource Label}"/>
+                                        <TextBox Style="{StaticResource Input}"
+                                                 Text="Auto-accept after clearing the old key"
+                                                 IsReadOnly="True"
+                                                 ToolTip="Locked to the original working SSH flow"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Authentication" Style="{StaticResource SectionTitle}" Margin="0,0,0,18"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="220"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="96"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Mode" Style="{StaticResource Label}"/>
+                                        <ComboBox x:Name="AuthModeInput">
+                                            <ComboBoxItem Content="Password" Tag="Password"/>
+                                            <ComboBoxItem Content="Private key" Tag="Private key"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Private key path (optional)" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="KeyPathInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <Button x:Name="BrowseKeyButton" Grid.Column="3" Content="Browse" Style="{StaticResource SecondaryButton}" Margin="10,25,0,0"/>
+                                </Grid>
+                                <Grid Margin="0,16,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="112"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="SSH password" Style="{StaticResource Label}"/>
+                                        <PasswordBox x:Name="PasswordInput"
+                                                     Height="40"
+                                                     Padding="12,8"
+                                                     Background="#0C1424"
+                                                     Foreground="#F3F7FF"
+                                                     BorderBrush="#293854"
+                                                     BorderThickness="1"
+                                                     FontSize="14"/>
+                                    </StackPanel>
+                                    <Button x:Name="ClearSavedPasswordButton"
+                                            Grid.Column="1"
+                                            Content="Clear saved"
+                                            Style="{StaticResource DangerButton}"
+                                            Margin="10,25,0,0"/>
+                                </Grid>
+                                <CheckBox x:Name="AutoLoginCheck"
+                                          Content="Use the encrypted saved password automatically for connection and reconnect"
+                                          Margin="0,13,0,0"/>
+                                <TextBlock x:Name="PasswordStatusText"
+                                           Text="No password is saved."
+                                           Foreground="#74859D"
+                                           FontSize="11"
+                                           Margin="0,7,0,0"/>
+                                <TextBlock Text="The password is encrypted with Windows DPAPI for this Windows account and is never stored in settings.json or process arguments."
+                                           TextWrapping="Wrap"
+                                           Foreground="#74859D"
+                                           FontSize="11"
+                                           Margin="0,7,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock Text="Reliability" Style="{StaticResource SectionTitle}" Margin="0,0,0,14"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Keep-alive interval (seconds)" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="KeepAliveInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Missed keep-alive limit" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="KeepAliveCountInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="4">
+                                        <TextBlock Text="Reconnect delay (seconds)" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ReconnectDelayInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <CheckBox x:Name="AutoReconnectCheck" Content="Reconnect automatically after a dropped connection" Margin="0,15,0,0"/>
+                                <CheckBox x:Name="ClearHostKeyCheck"
+                                          Content="Always remove the old SSH host key before Connect (matches the original script)"
+                                          IsChecked="True"
+                                          IsEnabled="False"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Visibility="Collapsed">
+                                <Button x:Name="ForgetHostKeyButton" Content="Forget saved host key" Style="{StaticResource DangerButton}"/>
+                                <Button x:Name="TestServerConnectionButton" Content="Test server" Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+                            </StackPanel>
+                            <Button x:Name="SaveConnectionButton" Content="Save SSH settings" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Right"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- V2RAY AND SING-BOX -->
+                <ScrollViewer x:Name="V2RayPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,20">
+                            <StackPanel>
+                                <TextBlock Text="V2Ray" Style="{StaticResource PageTitle}"/>
+                                <TextBlock Text="Paste a config or add a subscription. Nivan handles the core automatically."
+                                           Foreground="{StaticResource SecondaryText}" Margin="0,7,0,0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <Button x:Name="OpenServersButton" Content="Choose server" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                                <Button x:Name="V2RayDisconnectButton" Content="Disconnect" Style="{StaticResource DangerButton}" Margin="0,0,10,0" IsEnabled="False" Visibility="Collapsed"/>
+                                <Button x:Name="V2RayConnectButton" Content="Connect" Style="{StaticResource PrimaryButton}" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Background="#0C1525" BorderBrush="#20304A" BorderThickness="1" CornerRadius="10" Padding="14,11" Margin="0,0,0,16">
+                            <TextBlock x:Name="V2RayConnectionStatusText"
+                                       Text="Import a config or subscription, then press Connect."
+                                       Foreground="#91A1B8"
+                                       TextWrapping="Wrap"/>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="18">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="16"/>
+                                    <ColumnDefinition Width="320"/>
+                                    <ColumnDefinition Width="12"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="Saved V2Ray profile" Style="{StaticResource SectionTitle}"/>
+                                    <TextBlock x:Name="V2RayProfileStatusText" Text="Only V2Ray configs appear here."
+                                               Foreground="#74859D" FontSize="11" Margin="0,6,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <ComboBox x:Name="V2RayProfileInput" Grid.Column="2" DisplayMemberPath="Name" VerticalAlignment="Center"/>
+                                <Button x:Name="UseV2RayProfileButton" Grid.Column="4" Content="Use this profile"
+                                        Style="{StaticResource PrimaryButton}" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Subscriptions" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="Add a link once. Its compatible servers are downloaded and imported immediately; no separate refresh or save step is required."
+                                           Foreground="#74859D" FontSize="11" Margin="0,7,0,14" TextWrapping="Wrap"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Subscription name" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="SubscriptionNameInput" Style="{StaticResource Input}" ToolTip="Example: Main servers"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Subscription URL" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="SubscriptionUrlInput" Style="{StaticResource Input}" ToolTip="Paste the complete subscription URL here"/>
+                                    </StackPanel>
+                                    <Button x:Name="DownloadSubscriptionButton" Grid.Column="4" Content="Add &amp; import now"
+                                            Style="{StaticResource PrimaryButton}" VerticalAlignment="Bottom"/>
+                                </Grid>
+                                <Grid Margin="0,11,0,11">
+                                    <TextBox x:Name="SubscriptionCategoryInput" Text="Subscription" Visibility="Collapsed"/>
+                                    <CheckBox x:Name="SubscriptionAutoUpdateCheck" Content="Refresh automatically every 24 hours"/>
+                                    <TextBlock x:Name="SubscriptionStatusText" Text="No managed subscription selected."
+                                               Foreground="#74859D" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ListBox x:Name="SubscriptionList" Height="150" Background="#0A1220" BorderBrush="#20304A"
+                                         BorderThickness="1" Foreground="#F3F7FF" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Padding" Value="10,8"/>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="110"/>
+                                                    <ColumnDefinition Width="180"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                                    <TextBlock Text="{Binding Category}" Foreground="#718199" FontSize="10" Margin="0,3,0,0"/>
+                                                </StackPanel>
+                                                <TextBlock Grid.Column="1" Text="{Binding ProfileCount}" VerticalAlignment="Center"/>
+                                                <StackPanel Grid.Column="2">
+                                                    <TextBlock Text="{Binding LastStatus}" Foreground="{Binding StatusBrush}" TextTrimming="CharacterEllipsis"/>
+                                                    <TextBlock Text="{Binding LastUpdated}" Foreground="#718199" FontSize="10" Margin="0,3,0,0"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,11,0,0">
+                                    <Button x:Name="RemoveSubscriptionButton" Content="Remove" Style="{StaticResource DangerButton}" Margin="0,0,10,0"/>
+                                    <Button x:Name="RefreshSelectedSubscriptionButton" Content="Refresh selected" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                                    <Button x:Name="RefreshAllSubscriptionsButton" Content="Refresh all" Style="{StaticResource SecondaryButton}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Visibility="Collapsed">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,16">
+                                    <StackPanel>
+                                        <TextBlock Text="Portable proxy core" Style="{StaticResource SectionTitle}"/>
+                                        <TextBlock Text="Secure mode runs only the reviewed Neko core included with Nivan Shield. Custom executable loading is disabled."
+                                                   Foreground="#74859D" FontSize="11" Margin="0,6,0,0" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                    <Button x:Name="TestSingBoxButton" Content="Check core" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <CheckBox x:Name="UseBundledCoreCheck"
+                                          Content="Use the portable core included with Nivan Shield (recommended)"
+                                          Margin="0,0,0,14"/>
+                                <TextBlock Text="Executable path" Style="{StaticResource Label}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="SingBoxPathInput" Style="{StaticResource Input}"/>
+                                    <Button x:Name="BrowseSingBoxButton" Grid.Column="1" Content="Browse..." Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+                                </Grid>
+                                <TextBlock x:Name="SingBoxStatusText" Text="Core has not been checked yet." Foreground="#74859D" FontSize="11" Margin="0,8,0,0"/>
+                                <Grid Margin="0,14,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="210"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="SingBoxAutoReconnectCheck" Content="Restart sing-box automatically if it exits"/>
+                                    <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                                        <TextBlock Text="Reconnect delay (seconds)" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="SingBoxReconnectDelayInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <Button x:Name="SaveSingBoxButton" Grid.Column="2" Content="Save core settings" Style="{StaticResource PrimaryButton}" Margin="12,25,0,0"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="1. Paste a V2Ray config" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="Paste one or more vmess://, vless://, trojan:// or ss:// links. The first imported server becomes ready to connect automatically."
+                                           Foreground="#74859D" FontSize="11" Margin="0,7,0,14"/>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="VMess / VLESS / Trojan / Shadowsocks" Foreground="#5DD9FF" FontSize="11" VerticalAlignment="Center"/>
+                                    <StackPanel Grid.Column="1" Visibility="Collapsed">
+                                        <TextBlock Text="Import category" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ImportCategoryInput" Text="V2Ray" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <TextBox x:Name="ConfigImportInput"
+                                         Height="120"
+                                         AcceptsReturn="True"
+                                         TextWrapping="Wrap"
+                                         VerticalScrollBarVisibility="Auto"
+                                         Style="{StaticResource Input}"
+                                         FontFamily="Consolas"
+                                         ToolTip="Paste share links here"/>
+                                <Grid Margin="0,12,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="PasteConfigsButton" Content="Paste clipboard" Style="{StaticResource SecondaryButton}"/>
+                                        <Button x:Name="ImportConfigFileButton" Content="Import file..." Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+                                        <Button x:Name="ImportQrConfigButton" Content="Import QR image..." Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"
+                                                ToolTip="Offline QR import — shortcut is configurable in Settings"/>
+                                    </StackPanel>
+                                    <Button x:Name="ImportConfigsButton" Content="Import &amp; use" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBlock x:Name="ImportResultText"
+                                           Text="Imported credentials will be encrypted separately for each profile."
+                                           Foreground="#74859D"
+                                           FontSize="11"
+                                           TextWrapping="Wrap"
+                                           Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock Text="2. Add a subscription link" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="Paste the HTTPS subscription link once. Servers are imported now and can be refreshed later."
+                                           Foreground="#74859D" FontSize="11" Margin="0,7,0,14"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Subscription name" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="LegacySubscriptionNameInput" Style="{StaticResource Input}" ToolTip="Example: Main servers"/>
+                                        <TextBlock Text="Subscription URL" Style="{StaticResource Label}" Margin="0,12,0,7"/>
+                                        <TextBox x:Name="LegacySubscriptionUrlInput" Style="{StaticResource Input}" ToolTip="Paste the complete subscription URL here"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <StackPanel Visibility="Collapsed">
+                                            <TextBlock Text="Category" Style="{StaticResource Label}"/>
+                                            <TextBox x:Name="LegacySubscriptionCategoryInput" Text="Subscription" Style="{StaticResource Input}"/>
+                                        </StackPanel>
+                                        <CheckBox x:Name="LegacySubscriptionAutoUpdateCheck" Content="Refresh automatically every 24 hours" Margin="0,13,0,0"/>
+                                        <Button x:Name="LegacyDownloadSubscriptionButton"
+                                                Content="Add subscription"
+                                                Style="{StaticResource PrimaryButton}"
+                                                HorizontalAlignment="Left"
+                                                Margin="0,9,0,0"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Border Background="#0A1220" BorderBrush="#20304A" BorderThickness="1" CornerRadius="10" Margin="0,16,0,0" Padding="6">
+                                    <ListBox x:Name="LegacySubscriptionList" Height="135" Background="Transparent" BorderThickness="0" Foreground="#F3F7FF" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                <Setter Property="Padding" Value="0"/>
+                                                <Setter Property="Margin" Value="0,2"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                            <Border x:Name="SubscriptionItemBorder" Background="{TemplateBinding Background}" CornerRadius="8" Padding="12,9">
+                                                                <ContentPresenter/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="SubscriptionItemBorder" Property="Background" Value="#152238"/>
+                                                                </Trigger>
+                                                                <Trigger Property="IsSelected" Value="True">
+                                                                    <Setter TargetName="SubscriptionItemBorder" Property="Background" Value="#1A304B"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="120"/>
+                                                        <ColumnDefinition Width="160"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                                        <TextBlock Text="{Binding Category}" Foreground="#718199" FontSize="10" Margin="0,4,0,0"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="1">
+                                                        <TextBlock Text="{Binding ProfileCount}"/>
+                                                        <TextBlock Text="{Binding AutoUpdateLabel}" Foreground="#5DD9FF" FontSize="9" FontWeight="Bold" Margin="0,4,0,0"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="2">
+                                                        <TextBlock Text="{Binding LastStatus}" Foreground="{Binding StatusBrush}" TextTrimming="CharacterEllipsis"/>
+                                                        <TextBlock Text="{Binding LastUpdated}" Foreground="#718199" FontSize="10" Margin="0,4,0,0"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                                <Grid Margin="0,11,0,0">
+                                    <TextBlock x:Name="LegacySubscriptionStatusText" Text="No managed subscription selected." Foreground="#74859D" FontSize="11" VerticalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button x:Name="LegacyRemoveSubscriptionButton" Content="Remove" Style="{StaticResource DangerButton}" Margin="0,0,10,0"/>
+                                        <Button x:Name="LegacyRefreshSelectedSubscriptionButton" Content="Refresh selected" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                                        <Button x:Name="LegacyRefreshAllSubscriptionsButton" Content="Refresh all" Style="{StaticResource SecondaryButton}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="3. External SOCKS / HTTP proxy" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="For a trusted local tool or proxy you control. Public free proxies can observe connection metadata and should not be treated as private."
+                                           Foreground="#FFBD69" FontSize="11" Margin="0,7,0,14" TextWrapping="Wrap"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Profile name" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ExternalProxyNameInput" Style="{StaticResource Input}" Text="External proxy"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Protocol" Style="{StaticResource Label}"/>
+                                        <ComboBox x:Name="ExternalProxyProtocolInput" SelectedIndex="0">
+                                            <ComboBoxItem Content="SOCKS5" Tag="socks"/>
+                                            <ComboBoxItem Content="HTTP" Tag="http"/>
+                                            <ComboBoxItem Content="HTTPS" Tag="https"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="4">
+                                        <TextBlock Text="Port" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ExternalProxyPortInput" Style="{StaticResource Input}" Text="1080"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Margin="0,12,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Host or IP" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ExternalProxyHostInput" Style="{StaticResource Input}" Text="127.0.0.1"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Username (optional)" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ExternalProxyUsernameInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="4">
+                                        <TextBlock Text="Password (optional)" Style="{StaticResource Label}"/>
+                                        <PasswordBox x:Name="ExternalProxyPasswordInput"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Margin="0,12,0,0">
+                                    <TextBlock x:Name="ExternalProxyStatusText" Text="Credentials are encrypted with Windows DPAPI."
+                                               Foreground="#74859D" FontSize="11" VerticalAlignment="Center"/>
+                                    <Button x:Name="AddExternalProxyButton" Content="Add external proxy" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock Text="Private by default" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="UUIDs and passwords are encrypted with Windows DPAPI. The temporary sing-box JSON exists only during a connection and is deleted on Disconnect or next startup."
+                                           Foreground="#91A1B8" LineHeight="20" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- PSIPHON -->
+                <ScrollViewer x:Name="PsiphonPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,20">
+                            <StackPanel>
+                                <TextBlock Text="Psiphon rescue provider" Style="{StaticResource PageTitle}"/>
+                                <TextBlock Text="A free fallback provider using only an approved official Psiphon core."
+                                           Foreground="{StaticResource SecondaryText}" Margin="0,7,0,0"/>
+                            </StackPanel>
+                            <Button x:Name="CreatePsiphonProfileButton" Content="Create &amp; use Psiphon profile" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                        </Grid>
+
+                        <Border Background="#201A12" BorderBrush="#5A4522" BorderThickness="1" CornerRadius="10" Padding="14,11" Margin="0,0,0,16">
+                            <TextBlock Text="Security rule: Nivan never downloads Psiphon automatically. The selected EXE must have a valid Psiphon publisher signature; its SHA-256 fingerprint is then pinned before it can run."
+                                       Foreground="#FFCF83" TextWrapping="Wrap"/>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Official core files" Style="{StaticResource SectionTitle}" Margin="0,0,0,13"/>
+                                <TextBlock Text="ConsoleClient.exe" Style="{StaticResource Label}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="110"/></Grid.ColumnDefinitions>
+                                    <TextBox x:Name="PsiphonCorePathInput" Style="{StaticResource Input}" IsReadOnly="True"/>
+                                    <Button x:Name="BrowsePsiphonCoreButton" Grid.Column="1" Content="Select official..." Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+                                </Grid>
+                                <TextBlock Text="client.config supplied with the official core" Style="{StaticResource Label}" Margin="0,12,0,7"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="110"/></Grid.ColumnDefinitions>
+                                    <TextBox x:Name="PsiphonConfigPathInput" Style="{StaticResource Input}" IsReadOnly="True"/>
+                                    <Button x:Name="BrowsePsiphonConfigButton" Grid.Column="1" Content="Select config..." Style="{StaticResource SecondaryButton}" Margin="10,0,0,0"/>
+                                </Grid>
+                                <TextBlock x:Name="PsiphonHashText" Text="No Psiphon executable has been approved." Foreground="#74859D" FontSize="11" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Provider settings" Style="{StaticResource SectionTitle}" Margin="0,0,0,13"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/><ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/><ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0"><TextBlock Text="Local SOCKS5 port" Style="{StaticResource Label}"/><TextBox x:Name="PsiphonSocksPortInput" Style="{StaticResource Input}" Text="1090"/></StackPanel>
+                                    <StackPanel Grid.Column="2"><TextBlock Text="Local HTTP port" Style="{StaticResource Label}"/><TextBox x:Name="PsiphonHttpPortInput" Style="{StaticResource Input}" Text="8090"/></StackPanel>
+                                    <StackPanel Grid.Column="4"><TextBlock Text="Region (optional, e.g. DE)" Style="{StaticResource Label}"/><TextBox x:Name="PsiphonRegionInput" Style="{StaticResource Input}" MaxLength="2"/></StackPanel>
+                                </Grid>
+                                <CheckBox x:Name="PsiphonAutoReconnectCheck" Content="Restart the Psiphon core if it exits" Margin="0,14,0,0"/>
+                                <StackPanel Width="260" HorizontalAlignment="Left" Margin="0,8,0,0">
+                                    <TextBlock Text="Restart delay (seconds)" Style="{StaticResource Label}"/>
+                                    <TextBox x:Name="PsiphonReconnectDelayInput" Style="{StaticResource Input}" Text="5"/>
+                                </StackPanel>
+                                <Grid Margin="0,14,0,0">
+                                    <TextBlock x:Name="PsiphonStatusText" Text="Psiphon is not configured yet." Foreground="#74859D" FontSize="11" VerticalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button x:Name="TestPsiphonButton" Content="Verify files" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                                        <Button x:Name="SavePsiphonButton" Content="Save Psiphon settings" Style="{StaticResource PrimaryButton}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- DNS CENTER -->
+                <ScrollViewer x:Name="DnsPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="DNS Center" Style="{StaticResource PageTitle}"/>
+                        <TextBlock Text="Test and apply popular Iranian DNS services, or restore the previous Windows setting. DNS does not hide your IP and is not a VPN."
+                                   Foreground="{StaticResource SecondaryText}" Margin="0,7,0,20" TextWrapping="Wrap"/>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="22">
+                            <StackPanel>
+                                <TextBlock Text="Choose a DNS provider" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <ComboBox x:Name="DnsProviderInput" Height="43"/>
+                                <TextBlock x:Name="DnsStatusText" Text="Windows DNS has not been changed by Nivan." Foreground="#74859D" FontSize="11" Margin="0,10,0,0" TextWrapping="Wrap"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                                    <Button x:Name="ApplyDnsButton" Content="Apply DNS" Style="{StaticResource PrimaryButton}" Margin="0,0,10,0"/>
+                                    <Button x:Name="TestDnsButton" Content="Test selected" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                                    <Button x:Name="TestAllDnsButton" Content="Test all" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                                    <Button x:Name="RestoreDnsButton" Content="Restore previous DNS" Style="{StaticResource DangerButton}"/>
+                                </StackPanel>
+                                <TextBox x:Name="DnsResultsBox" Height="135" Margin="0,14,0,0" Background="#090F1B" BorderThickness="1" BorderBrush="#20304A"
+                                         Foreground="#9BB0C9" FontFamily="Consolas" FontSize="11" IsReadOnly="True" Padding="12"
+                                         VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Custom DNS" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0"><TextBlock Text="Name" Style="{StaticResource Label}"/><TextBox x:Name="CustomDnsNameInput" Style="{StaticResource Input}" Text="Custom DNS"/></StackPanel>
+                                    <StackPanel Grid.Column="2"><TextBlock Text="Primary IPv4" Style="{StaticResource Label}"/><TextBox x:Name="CustomDnsPrimaryInput" Style="{StaticResource Input}"/></StackPanel>
+                                    <StackPanel Grid.Column="4"><TextBlock Text="Secondary IPv4" Style="{StaticResource Label}"/><TextBox x:Name="CustomDnsSecondaryInput" Style="{StaticResource Input}"/></StackPanel>
+                                </Grid>
+                                <Button x:Name="SaveCustomDnsButton" Content="Save custom DNS" Style="{StaticResource SecondaryButton}" HorizontalAlignment="Left" Margin="0,13,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="Safe restore" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <CheckBox x:Name="DnsRestoreOnDisconnectCheck" Content="Restore the previous DNS whenever VPN disconnects"/>
+                                <CheckBox x:Name="DnsRestoreAfterCrashCheck" Content="Restore DNS automatically after an unclean Nivan shutdown"/>
+                                <TextBlock Text="Nivan saves the previous adapter state before the first DNS change. Restore is always available even if a DNS test fails."
+                                           Foreground="#74859D" FontSize="11" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- INTEGRATED SSH ROUTING -->
+                <ScrollViewer x:Name="NekoRayPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Integrated SSH routing" Style="{StaticResource PageTitle}"/>
+                        <TextBlock Text="The bundled Neko core runs silently inside Nivan Shield. No separate window or profile list is required."
+                                   Foreground="{StaticResource SecondaryText}" Margin="0,7,0,20"/>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16" Padding="22">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Border Width="50" Height="50" CornerRadius="14" Background="#182D46">
+                                        <TextBlock Text="◇" Foreground="#5DD9FF" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <StackPanel Margin="14,0,0,0" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse x:Name="NekoStatusDot" Width="8" Height="8" Fill="#64738A" Margin="0,2,8,0"/>
+                                            <TextBlock x:Name="NekoStatusLabel" Text="Routing is idle" FontSize="17" FontWeight="SemiBold"/>
+                                        </StackPanel>
+                                        <TextBlock x:Name="NekoPidLabel" Text="Connect SSH to start System Proxy and TUN" Foreground="#718199" FontSize="11" Margin="16,5,0,0" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button x:Name="StopNekoButton" Content="Stop routing" Style="{StaticResource DangerButton}" IsEnabled="False" Margin="0,0,10,0"/>
+                                    <Button x:Name="LaunchNekoButton" Content="Start routing" Style="{StaticResource PrimaryButton}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Routing modes" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <CheckBox x:Name="NekoSystemProxyCheck"
+                                          Content="System Proxy — managed automatically by the Home routing mode" IsEnabled="False"/>
+                                <CheckBox x:Name="NekoTunCheck"
+                                          Content="TUN mode — managed automatically by the Home routing mode" IsEnabled="False"/>
+                                <TextBlock Text="Choose Browser only, Selected applications, Whole Windows, or System Proxy on Home. Whole Windows enables TUN and System Proxy together for NekoRay-compatible behavior."
+                                           Foreground="#74859D" FontSize="11" TextWrapping="Wrap" LineHeight="18" Margin="0,8,0,16"/>
+                                <Grid Width="330" HorizontalAlignment="Left">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="210"/>
+                                        <ColumnDefinition Width="120"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Integrated HTTP/SOCKS port" Style="{StaticResource Label}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="NekoMixedPortInput" Grid.Column="1" Style="{StaticResource Input}" Text="2080"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Automation" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <CheckBox x:Name="NekoEnabledCheck" Content="Enable integrated routing for SSH connections"/>
+                                <CheckBox x:Name="NekoAutoStartCheck" Content="Start automatically after the SSH SOCKS port is ready"/>
+                                <CheckBox x:Name="NekoCloseCheck" Content="Always stop routing and remove LAN Proxy on Disconnect" IsEnabled="False" IsChecked="True"/>
+                                <StackPanel Width="260" HorizontalAlignment="Left" Margin="0,10,0,0">
+                                    <TextBlock Text="Start delay after SSH connects (seconds)" Style="{StaticResource Label}"/>
+                                    <TextBox x:Name="NekoDelayInput" Style="{StaticResource Input}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="How it works" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock Text="Nivan keeps the original SSH flow on 127.0.0.1:1080, then the bundled core creates an integrated mixed proxy and optional TUN adapter. DNS uses encrypted DoH through the SSH route. The core configuration is temporary and is removed after Disconnect."
+                                           Foreground="#91A1B8" TextWrapping="Wrap" LineHeight="20" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Button x:Name="SaveNekoButton" Content="Save routing settings" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- LOGS -->
+                <Grid x:Name="LogsPage" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="16"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="Activity logs" Style="{StaticResource PageTitle}"/>
+                            <TextBlock Text="Connection lifecycle, reconnect attempts, and app events." Foreground="{StaticResource SecondaryText}" Margin="0,7,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Button x:Name="OpenLogsButton" Content="Open log folder" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                            <Button x:Name="CopyLogsButton" Content="Copy" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                            <Button x:Name="ClearLogsButton" Content="Clear" Style="{StaticResource DangerButton}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Border Grid.Row="2" Style="{StaticResource Card}" Padding="10">
+                        <TextBox x:Name="LogBox" Background="#090F1B" BorderThickness="0" Foreground="#9BB0C9" FontFamily="Consolas" FontSize="12" IsReadOnly="True" Padding="14" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap"/>
+                    </Border>
+                </Grid>
+
+                <!-- PREFERENCES -->
+                <ScrollViewer x:Name="AboutPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Settings" Style="{StaticResource PageTitle}"/>
+                        <TextBlock Text="Everyday controls are on Home. These options are changed less often." Foreground="{StaticResource SecondaryText}" Margin="0,7,0,14"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                            <Button x:Name="OpenRoutingSettingsButton" Content="Routing settings" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                            <Button x:Name="OpenActivityLogsButton" Content="Activity logs" Style="{StaticResource SecondaryButton}"/>
+                        </StackPanel>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Application behavior" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <CheckBox x:Name="MinimizeToTrayCheck" Content="Keep Nivan Shield running in the system tray"/>
+                                <CheckBox x:Name="StartMinimizedCheck" Content="Start minimized in the system tray"/>
+                                <CheckBox x:Name="ConfirmExitCheck" Content="Ask before closing an active tunnel"/>
+                                <CheckBox x:Name="EnableLanProxyOnConnectCheck"
+                                          Content="Automatically route Windows apps through the active V2Ray local proxy"/>
+                                <CheckBox x:Name="DisableLanProxyOnDisconnectCheck"
+                                          Content="Disable 'Use a proxy server for your LAN' whenever the tunnel disconnects"/>
+                                <Button x:Name="SaveAppButton" Content="Save preferences" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Left" Margin="0,14,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Connection health tests" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <CheckBox x:Name="AutoHealthCheckAfterConnectCheck"
+                                          Content="Run a lightweight tunneled health check after connecting"/>
+                                <TextBlock Text="The automatic check measures latency only and transfers a few bytes. Speed tests always require a button click."
+                                           Foreground="#74859D" FontSize="11" TextWrapping="Wrap" LineHeight="18" Margin="0,3,0,14"/>
+                                <Grid Width="600" HorizontalAlignment="Left">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="145"/>
+                                        <ColumnDefinition Width="90"/>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="145"/>
+                                        <ColumnDefinition Width="90"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="12"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="Latency samples" Style="{StaticResource Label}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="HealthLatencySamplesInput" Grid.Column="1" Style="{StaticResource Input}"/>
+                                    <TextBlock Grid.Column="3" Text="Quick download (MB)" Style="{StaticResource Label}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="QuickDownloadSizeInput" Grid.Column="4" Style="{StaticResource Input}"/>
+                                    <TextBlock Grid.Row="2" Text="Full download (MB)" Style="{StaticResource Label}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="FullDownloadSizeInput" Grid.Row="2" Grid.Column="1" Style="{StaticResource Input}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="3" Text="Full upload (MB)" Style="{StaticResource Label}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="FullUploadSizeInput" Grid.Row="2" Grid.Column="4" Style="{StaticResource Input}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Smart Connect &amp; failover" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <CheckBox x:Name="AutoFailoverCheck"
+                                          Content="Automatically switch to another working profile when reconnecting takes too long"/>
+                                <CheckBox x:Name="PreferFavoritesCheck"
+                                          Content="Give favorite profiles a small priority in Smart Connect"/>
+                                <TextBlock Text="Nivan first checks server reachability, then chooses the lowest-latency usable profile. Passwords and proxy credentials stay protected by DPAPI."
+                                           Foreground="#74859D" FontSize="11" TextWrapping="Wrap" LineHeight="18" Margin="0,4,0,14"/>
+                                <Grid Width="510" HorizontalAlignment="Left">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="190"/>
+                                        <ColumnDefinition Width="90"/>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="110"/>
+                                        <ColumnDefinition Width="90"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Failover delay (seconds)" Style="{StaticResource Label}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="FailoverDelayInput" Grid.Column="1" Style="{StaticResource Input}"/>
+                                    <TextBlock Grid.Column="3" Text="Max attempts" Style="{StaticResource Label}" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="FailoverMaxAttemptsInput" Grid.Column="4" Style="{StaticResource Input}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Network protection &amp; split tunneling" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <CheckBox x:Name="RecoverProxyAfterCrashCheck"
+                                          Content="Repair Windows LAN Proxy automatically after an unclean app shutdown"/>
+                                <CheckBox x:Name="ProxyNetworkLockCheck"
+                                          Content="Network Lock for proxy-aware Windows apps after an unexpected disconnect"/>
+                                <CheckBox x:Name="SplitTunnelingCheck"
+                                          Content="Enable Split Tunneling rules for System Proxy and TUN"/>
+                                <TextBlock Text="Network Lock is intentionally limited to apps that honor Windows System Proxy. Manual Disconnect still removes the LAN Proxy checkbox exactly as before."
+                                           Foreground="#FFBD69" FontSize="11" TextWrapping="Wrap" LineHeight="18" Margin="0,4,0,15"/>
+                                <TextBlock Text="System Proxy bypass list (semicolon separated)" Style="{StaticResource Label}"/>
+                                <TextBox x:Name="ProxyBypassListInput" Style="{StaticResource Input}" Margin="0,0,0,12"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="TUN bypass process names" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="TunBypassProcessesInput" Style="{StaticResource Input}" ToolTip="Example: game.exe; accounting.exe"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="TUN bypass domains" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="TunBypassDomainsInput" Style="{StaticResource Input}" ToolTip="Example: ir; company.local"/>
+                                    </StackPanel>
+                                </Grid>
+                                <TextBlock Text="TUN bypass IP ranges (CIDR)" Style="{StaticResource Label}" Margin="0,13,0,7"/>
+                                <TextBox x:Name="TunBypassCidrsInput" Style="{StaticResource Input}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,12">
+                                    <TextBlock Text="Keyboard shortcuts" Style="{StaticResource SectionTitle}"/>
+                                    <Button x:Name="ResetShortcutsButton" Content="Reset shortcuts" Style="{StaticResource SecondaryButton}"
+                                            HorizontalAlignment="Right"/>
+                                </Grid>
+                                <TextBlock Text="Click a field and type a shortcut such as Ctrl+I. Shortcuts must be unique."
+                                           Foreground="#74859D" FontSize="11" Margin="0,0,0,14" TextWrapping="Wrap"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="14"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="12"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Import config file" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ShortcutImportConfigInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <TextBlock Text="Import QR image" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ShortcutImportQrInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="4">
+                                        <TextBlock Text="New connection" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ShortcutNewConnectionInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" Grid.Column="0">
+                                        <TextBlock Text="Select all profiles" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ShortcutSelectAllInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" Grid.Column="2">
+                                        <TextBlock Text="Delete profiles" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ShortcutDeleteInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" Grid.Column="4">
+                                        <TextBlock Text="Duplicate profile" Style="{StaticResource Label}"/>
+                                        <TextBox x:Name="ShortcutDuplicateInput" Style="{StaticResource Input}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Application updates" Style="{StaticResource SectionTitle}" Margin="0,0,0,12"/>
+                                <CheckBox x:Name="CheckUpdatesOnStartupCheck"
+                                          Content="Check the configured update manifest when Nivan Shield starts"/>
+                                <TextBlock Text="Update manifest URL (HTTPS)" Style="{StaticResource Label}" Margin="0,8,0,7"/>
+                                <TextBox x:Name="UpdateManifestUrlInput" Style="{StaticResource Input}" ToolTip="Vendor manifest containing version, download_url, sha256, and notes"/>
+                                <Grid Margin="0,13,0,0">
+                                    <StackPanel>
+                                        <TextBlock x:Name="UpdateStatusText" Text="No update source configured." Foreground="#74859D" FontSize="11"/>
+                                        <ProgressBar x:Name="UpdateProgressBar" Width="300" HorizontalAlignment="Left" Value="0" Margin="0,9,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                        <Button x:Name="OpenUpdateFolderButton" Content="Open folder" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0"/>
+                                        <Button x:Name="DownloadUpdateButton" Content="Download verified ZIP" Style="{StaticResource SecondaryButton}" Margin="0,0,10,0" IsEnabled="False"/>
+                                        <Button x:Name="CheckUpdatesButton" Content="Check now" Style="{StaticResource PrimaryButton}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <TextBlock Text="Nivan verifies the ZIP against the SHA-256 value in the manifest and never installs it automatically. A public release should additionally sign the manifest and EXE."
+                                           Foreground="#74859D" FontSize="11" TextWrapping="Wrap" LineHeight="18" Margin="0,12,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,16">
+                            <StackPanel>
+                                <TextBlock Text="Security" Style="{StaticResource SectionTitle}"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#91A1B8" LineHeight="21" Margin="0,12,0,0"
+                                           Text="Saved SSH passwords are protected per profile by Windows DPAPI for the current Windows user. To preserve the original working flow, the saved host-key entry is removed before every connection and the new key is accepted automatically."/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#91A1B8" LineHeight="21" Margin="0,10,0,0"
+                                           Text="Automatic login uses a private SSH_ASKPASS helper. The password is never placed in command-line arguments, settings.json, or logs."/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#91A1B8" LineHeight="21" Margin="0,10,0,0"
+                                           Text="Imported proxy UUIDs and passwords are also DPAPI-protected per profile. sing-box receives them through a temporary runtime configuration that is removed after disconnect."/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}">
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="Nivan Shield" FontSize="20" FontWeight="SemiBold"/>
+                                    <TextBlock Text="Version 6.0.5  •  Open-source multi-provider client" Foreground="#74849B" Margin="0,7,0,0"/>
+                                    <TextBlock Text="Making access to the free and open internet easier."
+                                               Foreground="#5DD9FF" Margin="0,9,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <Button x:Name="ExitAppButton" Content="Exit application" Style="{StaticResource DangerButton}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

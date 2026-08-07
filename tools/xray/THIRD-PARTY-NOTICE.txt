@@ -1,0 +1,24 @@
+Xray-core v26.3.27
+==================
+
+Nivan Shield uses the unmodified official Windows x64 Xray-core executable
+only for imported XHTTP profiles. Other supported proxy transports continue
+to use the separately bundled sing-box-based core.
+
+Upstream project and source:
+https://github.com/XTLS/Xray-core
+
+Official release:
+https://github.com/XTLS/Xray-core/releases/tag/v26.3.27
+
+License: Mozilla Public License 2.0. A complete copy is included as LICENSE in
+this directory.
+
+Official release ZIP SHA-256:
+d004c39288ce9ada487c6f398c7c545f7d749e44bdfdd59dbc9f865afba4e1ad
+
+Bundled xray.exe SHA-256:
+15c2d007954ac53ba69b80ec91242786b3c0b71d52649165b4ca1d5cc96ef8f1
+
+The executable is hash-pinned by both the build script and the application
+before use. Preserve this notice and the MPL-2.0 license when redistributing.

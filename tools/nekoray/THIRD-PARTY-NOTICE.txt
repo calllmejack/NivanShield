@@ -1,0 +1,36 @@
+NekoRay / NekoBox for PC 4.0.1 (2024-12-12)
+================================================
+
+Nivan Shield 4.1 runs the separately distributed nekobox_core.exe headlessly
+as an integrated SSH routing engine. The NekoRay graphical window is not
+launched by the default workflow. NekoRay is not authored by the Nivan Shield
+project.
+
+Upstream project and corresponding source:
+https://github.com/MatsuriDayo/nekoray
+
+Upstream release (tag/revision shown by the project):
+https://github.com/MatsuriDayo/nekoray/releases/tag/4.0.1
+Revision: adef6cd4af7dffc77235c524086f3dc4100d8457
+
+License: GNU General Public License, version 3. A complete copy is included as
+LICENSE-GPL-3.0.txt in this directory. The upstream repository was archived by
+its owner in March 2025 and is read-only.
+
+Portable package hygiene
+------------------------
+The Neko core was copied from the user-supplied Windows 4.0.1 portable archive.
+The graphical nekobox.exe/Qt runtime, updater, profiles, subscriptions, logs,
+and the entire personal config directory are excluded from the 4.1 release.
+Nivan Shield creates only a temporary runtime routing config under its own
+local application-data directory and removes it on Disconnect.
+
+Binary identification (SHA-256)
+-------------------------------
+nekobox_core.exe
+b365388ee5f53edd453a7a461e3f58e05c63eebcc39c681070f05f2eacfd4c6d
+
+The software is provided without warranty. When redistributing or selling a
+package containing these files, preserve this notice, the GPL license, and
+access to the corresponding source. Consult qualified counsel for legal advice
+about a particular distribution model.

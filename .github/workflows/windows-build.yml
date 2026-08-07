@@ -1,0 +1,84 @@
+name: Windows build
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run crash recovery regression tests
+        shell: powershell
+        run: .\tests\SessionMarkerFile.Tests.ps1
+
+      - name: Build .NET Framework executables
+        shell: powershell
+        run: .\Build.ps1 -Quiet
+
+      - name: Create portable and source releases
+        shell: powershell
+        run: |
+          $releaseRoot = Join-Path $env:RUNNER_TEMP 'NivanShield-release'
+          $portableRoot = Join-Path $releaseRoot 'NivanShield'
+          $sourceRoot = Join-Path $releaseRoot 'NivanShield-source'
+          New-Item -ItemType Directory -Path $portableRoot -Force | Out-Null
+          New-Item -ItemType Directory -Path $sourceRoot -Force | Out-Null
+
+          @(
+            'NivanShield.exe', 'NivanShield.exe.config', 'NivanShield.cmd',
+            'README.md', 'README-FA.md', 'CHANGELOG.md', 'SECURITY.md', 'LICENSE'
+          ) | ForEach-Object { Copy-Item $_ $portableRoot -Force }
+
+          @(
+            'Build.cmd', 'Build.ps1', 'NivanShield.cmd', 'NivanShield.exe.config',
+            'README.md', 'README-FA.md', 'ROADMAP-FA.md', 'CHANGELOG.md',
+            'CONTRIBUTING.md', 'SECURITY.md', 'LICENSE', 'UPDATE-MANIFEST.example.json', '.gitignore'
+          ) | ForEach-Object { Copy-Item $_ $sourceRoot -Force }
+          Copy-Item 'src' (Join-Path $sourceRoot 'src') -Recurse -Force
+          Copy-Item 'tests' (Join-Path $sourceRoot 'tests') -Recurse -Force
+          Copy-Item 'app' (Join-Path $sourceRoot 'app') -Recurse -Force
+          Remove-Item (Join-Path $sourceRoot 'app\build-version.txt') -Force -ErrorAction SilentlyContinue
+          Remove-Item (Join-Path $sourceRoot 'app\NivanAskPass.exe') -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType Directory -Path (Join-Path $sourceRoot '.github\workflows') -Force | Out-Null
+          Copy-Item '.github\workflows\windows-build.yml' (Join-Path $sourceRoot '.github\workflows') -Force
+
+          foreach ($targetRoot in @($portableRoot, $sourceRoot)) {
+            foreach ($folder in @('nekoray', 'qrcode', 'xray', 'sing-box', 'psiphon')) {
+              New-Item -ItemType Directory -Path (Join-Path $targetRoot "tools\$folder") -Force | Out-Null
+            }
+            Copy-Item 'tools\integrity.sha256' (Join-Path $targetRoot 'tools') -Force
+            Copy-Item 'tools\nekoray\nekobox_core.exe' (Join-Path $targetRoot 'tools\nekoray') -Force
+            Copy-Item 'tools\nekoray\LICENSE-GPL-3.0.txt' (Join-Path $targetRoot 'tools\nekoray') -Force
+            Copy-Item 'tools\nekoray\THIRD-PARTY-NOTICE.txt' (Join-Path $targetRoot 'tools\nekoray') -Force
+            Copy-Item 'tools\qrcode\zxing.dll' (Join-Path $targetRoot 'tools\qrcode') -Force
+            Copy-Item 'tools\qrcode\LICENSE-APACHE-2.0.txt' (Join-Path $targetRoot 'tools\qrcode') -Force
+            Copy-Item 'tools\qrcode\THIRD-PARTY-NOTICE.txt' (Join-Path $targetRoot 'tools\qrcode') -Force
+            Copy-Item 'tools\xray\xray.exe' (Join-Path $targetRoot 'tools\xray') -Force
+            Copy-Item 'tools\xray\LICENSE' (Join-Path $targetRoot 'tools\xray') -Force
+            Copy-Item 'tools\xray\THIRD-PARTY-NOTICE.txt' (Join-Path $targetRoot 'tools\xray') -Force
+            Copy-Item 'tools\sing-box\README.txt' (Join-Path $targetRoot 'tools\sing-box') -Force
+            Copy-Item 'tools\psiphon\README.txt' (Join-Path $targetRoot 'tools\psiphon') -Force
+          }
+
+          $portableZip = Join-Path $releaseRoot 'NivanShield-6.0.5-windows-x64.zip'
+          $sourceZip = Join-Path $releaseRoot 'NivanShield-6.0.5-source.zip'
+          Compress-Archive -Path $portableRoot -DestinationPath $portableZip -Force
+          Compress-Archive -Path $sourceRoot -DestinationPath $sourceZip -Force
+          "PORTABLE_ZIP=$portableZip" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "SOURCE_ZIP=$sourceZip" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Upload Windows and source packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: NivanShield-6.0.5-release
+          path: |
+            ${{ env.PORTABLE_ZIP }}
+            ${{ env.SOURCE_ZIP }}
+          if-no-files-found: error
